@@ -153,4 +153,100 @@ file object表示一个打开的文件，可使用多种方法创建文件对象
 3. 异步迭代器
 4. 异步上下文管理器
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-### 执行模型
+### 内置函数
+- abs(x)：返回一个数的绝对值
+- all(iterable)：如果迭代器为空或者所有元素为真返回True，否则返回False，相当于
+```
+def all(ite) {
+    for element in ite:
+        if not element:
+            return False
+    return True
+```
+- any(iterable)：如果迭代器不为空并且任一元素为真返回True，否则返回False，相当于
+```
+def any(ite) {
+    for element in ite:
+        if element:
+            return True
+    return False
+}
+```
+- ascii(object)：返回一个对象可打印的字符串
+- bin(x)：将一个整数转换为一个前缀为0b的二进制字符串
+- bool([x])：返回一个布尔值，True或False，x使用标准的真值测试过程来转换，如果x为假或忽略返回False，其它情况返回True
+- breakpoint(*args, **kws)：此函数会在调用时进入调试器
+- bytearray([source[, encoding[, errors]]])：返回一个新的byte数组，bytearray类是一个可变序列，范围是0<=x<256的整数，可
+    选形参source可以用不同的方式来初始化数组
+```
+    - 如果是一个string，则必须提供encoding参数，errors是可选的，此时会使用str.encode()方法将string转换为bytes
+    - 如果是一个integer，会初始化一个大小为该数字的数组，并使用null填充
+    - 如果是一个符合buffer接口的对象，该对象的只读buffer会用来初始化字节数组
+    - 如果是一个iterable可迭代对象，它的元素范围必须是0<=x<256的整数，它会被用作数组的初始内容
+    - 如果没有参数，则创建大小为0的数组
+```
+- bytes([source[, encoding[, errors]]])：返回一个新的bytes对象，是一个不可变序列，包含的范围为0<=x<256的整数，bytes是
+    bytesarray的不可变版本，构造函数的参数与bytearray一样
+- callable(object)：如果参数object是可调用的则返回True，否则返回False
+- chr(i)：返回Unicode码位为 _i_ 的字符的字符串格式，chr(97)返回'a'，是ord()的逆函数
+- @classmethod：把一个方法封装成类方法
+- compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)：
+    将source编译成代码或AST对象，代码对象可以被exec()和eval()执行
+- complex([real[, imag]])：返回值为 _real_ + _imag_*1j的复数，或将字符串或数字转换为复数，如果第一个形参是字符串，则它被
+    解析为复数，并且函数调用时必须没有第二个参数，第二个形参不能是字符串
+- delattr(object, name)：删除指定对象的指定属性
+- dict(**kwarg)、dict(mapping, **kwarg)、dict(iterable, **kwarg)：创建一个新字典
+- dir([object])：如果没有实参，则返回当前本地作用域中的名称列表，如果有实参，返回该对象的有效属性列表，如果对象有一个
+    \_\_dir__()方法，则该方法被调用
+- divmod(a, b)：将两个非复数数字作为参数，并在执行整数除法时返回一对商和余数
+- enumerate(iterable, start=0)：返回一个枚举对象，iterable必须是一个序列或iterator或其它可迭代对象，返回迭代器的方法
+    \_\_next__()返回一个元组，包含计数值和通过迭代iterable获得的值，相当于
+```
+def enumerate(ite, start=0):
+    n = start
+    for elem in ite:
+        yield n, elem
+        n += 1
+```
+- eval(expression, globals=None, locals=None)：实参是一个字符串，globals必须是一个字典，locals可以是任何映射对象，
+    expression参数会作为一个Python表达式被解析并求值
+- exec(object[, globals[, locals]])：此函数支持动态执行Python代码，object必须是字符串或代码对象，如果是字符串，则会被
+    解析为一系列Python语句并执行，如果是代码对象则会被直接执行
+- filter(function, iterable)：用iterable中函数function返回真的那些元素构建一个新的迭代器，如果function为None，则iterable
+    中所有返回假的元素被删除
+- float([x])：返回从数字或字符串x生成的浮点数，如果是字符串则必须是包含十进制数字的字符串
+- format(value[, format_spec])：将value转换为format_spec控制的“格式化”表示
+- frozenset([iterable])：返回一个新的frozenset对象，它包含可选参数iterable中的元素
+- getattr(object, name[, default])：返回对象的属性的值，name必须为字符串
+- globals()：返回当前全局符号表的字典，这总是当前模块的字典（在函数和方法中，不是调用它的模块，而是定义它的模块）
+- hasattr(object, name)：如果name是对象object的属性之一的名称，则返回True，否则返回False
+- hash(object)：返回对象的哈希值，相同大小的数字变量有相同的哈希值，即使它们类型不同，如1和1.0的哈希值相同
+- help([object])： 帮助函数，
+- hex(x)：将整数转换成以0x为前缀的小写十六进制字符串，如果x不是Python的int对象，则必须定义返回整数的__index__()方法
+- id(object)：返回对象的标识值，该值是一个整数，在对象的生命周期中是唯一且恒定的
+- input([prompt])：如果存在实参prompt则将其写入标准输出，末尾不带换行符，然后该函数从输入中读取一行将其转换为字符串并
+    返回，当读取到EOF时则出发EOFError
+- int([x])、int(x, base=10)：返回一个使用数字或字符串x生成的整数，没有实参时返回0，
+- isinstance(object, classinfo)：如果object是classinfo的实例，或者是（直接、间接或虚拟）字类的实例则返回True，其它False
+- issubclass(class, classinfo)：如果class是classinfo的字类（直接、间接或虚拟）则返回True
+- iter(object[, sentinel])：返回一个iterator对象
+- len(s)：返回对象的长度
+- list([iterable])：可变序列
+- locals()：更新并返回表示当前本地符号表的字典，在函数代码块但不是类代码块中调用时返回自由变量
+- map(function, iterable, ...)：返回一个将function应用与iterable中每一项并输出其结果的迭代器
+- max(iterable, *[, key, default])、max(arg1, arg2, *args[, key])：返回可迭代对象中最大的元素或多个实参中最大的一个
+- memoryview(obj)：返回由给定实参创建的内存视图对象
+- min(iterable, *[, key, default])、min(arg1, arg2, *args[, key])：返回可迭代对象中最小的元素或多个实参中最小的一个
+- next(iterator[, default])：通过调用iterator.\_\_next__()方法获取下一个元素，如果迭代器耗尽，则返回default，如果未设定
+    default则触发StopIteration
+- object：返回一个没有特征的新对象，object是所有类的基类，不接受任何实参
+- oct(x)：将一个整数转换为前缀是0o的八进制字符串，如果x不是Python的int对象，则必须定义返回整数的__index__()方法
+-
+-
+-
+-
+-
+-
+-
+-
+-
