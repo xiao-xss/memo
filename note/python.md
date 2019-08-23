@@ -284,3 +284,10 @@ def enumerate(ite, start=0):
 - vars([object])：返回模块、类、实例或任何具有__dict__属性的对象的__dict__属性
 - zip(*iterables)：创建一个聚合了来自每个可迭代对象中的元素的迭代器
 - \_\_import__(name, globals=None, locals=None, fromlist=(), level=0)： 此函数会有import语句发起调用
+
+### 内置常量
+### 内置类型
+### 内置异常
+### 文本处理服务
+### 二进制数据服务
+### 数据类型
