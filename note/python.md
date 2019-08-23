@@ -241,12 +241,46 @@ def enumerate(ite, start=0):
     default则触发StopIteration
 - object：返回一个没有特征的新对象，object是所有类的基类，不接受任何实参
 - oct(x)：将一个整数转换为前缀是0o的八进制字符串，如果x不是Python的int对象，则必须定义返回整数的__index__()方法
--
--
--
--
--
--
--
--
--
+- open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)：  
+    打开文件file并返回对应的文件对象，如果文件不能打开则触发OSError  
+    mode指定打开文件的模式，默认是r，表示以文本模式打开并读取，可用的模式有  
+    <table>
+        <tr><th>字符</th><th>意义</th></tr>
+        <tr><td>r</td><td>读取（默认）</td></tr>
+        <tr><td>w</td><td>写入，并先截断文件（覆盖写入）</td></tr>
+        <tr><td>x</td><td>排他性创建，如果文件已存在则失败</td></tr>
+        <tr><td>a</td><td>写入，如果文件存在则在末尾追加</td></tr>
+        <tr><td>b</td><td>二进制模式</td></tr>
+        <tr><td>t</td><td>文本模式（默认）</td></tr>
+        <tr><td>+</td><td>更新磁盘文件（读取并写入）</td></tr>
+    </table>
+    buffering用于设置缓冲策略，0为缓冲关闭（仅允许在二进制模式下），1为选择行缓冲（仅在文本模式下），>1的整数表示固定大
+    小的缓冲区（以字节为单位），未指定则以默认的缓冲策略方式工作：二进制文件以固定大小的块进行缓冲，交互式文本文件使用行缓冲<br>
+    encoding：用于解码或编码文件的编码名称，只在文本模式下使用
+- ord(c)：对表示单个Unicode字符的字符串返回代表它Unicode码点的整数
+- pow(x, y[, z])：返回x的y次幂，如果z存在，则对z取余，比pow(x, y)%z计算更高效，pow(x, y)等价于x**y
+- print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)：  
+    将objects打印到file指定的文本流，以sep分隔并在末尾加上end
+- property(fget=None, fset=None, fdel=None, doc=None)：返回属性
+    fget：获取属性值的函数，fset：设置属性值的函数，fdel：删除属性值的函数，doc：为属性对象创建文本文档
+- range(stop)、range(start, stop[, step])：返回一个不可变序列
+- repr(object)：返回包含一个对象的可打印表示形式的字符串
+- reversed(seq)：返回一个反向迭代器，seq必须是一个具有__reversed__()方法的对象或是支持该序列协议
+- round(number[, ndigits])：返回number舍入到小数点后ndigits位精度的值，如果ndigits为None，则返回最接近输入值的整数，对于
+    支持round()的内置类型，值会被舍入到最接近的10的负ndigits次幂的倍数，如果与两个倍数的距离相等，则选择偶数，因此
+    round(0.5)和round(-0.5)都是0，而round(1.5)为2
+- set([iterable])：返回一个新的set对象，初始值为iterable中的元素
+- setattr(object, name, value)：此函数与getattr()对应，为对象的属性赋值
+- slice(stop)、slice(start, stop[, step])：返回一个表示由 range(start, stop, step) 所指定索引集的 slice 对象
+- sorted(iterable, *, key=None, reverse=False)：根据iterable中的项返回一个已排序的列表
+- @staticmethod：将方法转换为静态方法，静态方法不会接收隐式的第一个参数
+- str(object='')、str(object=b'', encoding='utf-8', errors='strict')：返回一个str版本的object
+- sum(iterable[, start])：从start开始自左到右对iterable中的项求和并返回合计值
+- super([type[, object-or-type]])：返回一个代理对象，它会将方法调用委托给type指定的父类或兄弟类
+- tuple([iterable])：返回一个不可变序列（元组）
+- type(object)、type(name, bases, dict)：传入一个参数时返回object类型，返回值是一个type对象，通常与object.__class__所返
+    回的结果一致，传入三个参数时，返回一个新的type对象，name为类名并且会成为__name__属性，bases元组列出基类并成为
+    __bases__属性，dict字典为包含类主体定义的命名空间并且会被复制到一个标准字典成为__dict__属性
+- vars([object])：返回模块、类、实例或任何具有__dict__属性的对象的__dict__属性
+- zip(*iterables)：创建一个聚合了来自每个可迭代对象中的元素的迭代器
+- \_\_import__(name, globals=None, locals=None, fromlist=(), level=0)： 此函数会有import语句发起调用
